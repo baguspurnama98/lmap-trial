@@ -1,11 +1,11 @@
 import React from "react"
-// import { Layout } from "antd"
-
-
+// import { Card } from "antd"
+import Card from '../components/CoinList/Card'
 const Home: React.FC = () => {
 	return (
         <div>
-            Ini Halaman Home
+            <p style={{fontWeight:"bold"}}>Coint List</p>
+        <Card />
         </div>
     )
 
