@@ -3,7 +3,7 @@ import { Layout } from "antd";
 import { AppHeader } from "./Header";
 import { AppContent } from "./Content";
 import { AppFooter } from "./Footer";
-import "antd/dist/antd.css";
+
 import "./index.css";
 
 interface Props {

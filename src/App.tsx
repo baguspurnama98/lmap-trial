@@ -1,20 +1,10 @@
+import Layout from "./layouts/";
+import RouteList from "./route";
 
-// import React from "react";
-// import "./App.css";
-// import { Provider } from "react-redux"
-// import { persistStore } from "redux-persist"
-// import { PersistGate } from "redux-persist/integration/react"
-// import { IntlProvider } from "react-intl"
-
-// import RouteList from "route"
-import Home from "./pages/Home"
-// import configureStore from "./redux/store"
-const App: React.FC = () => 
-   (
-    <Home />
-
-  
-  );
-
+const App: React.FC = () => (
+  <Layout>
+    <RouteList />
+  </Layout>
+);
 
 export default App;

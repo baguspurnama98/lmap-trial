@@ -1,17 +1,32 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
-// import "./index.css";
+import "antd/dist/antd.css";
+import "./index.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
-import Layout from "./layouts/";
+import { BrowserRouter } from "react-router-dom";
+
+// import {
+//   createBrowserRouter,
+//   RouterProvider,
+//   Route,
+// } from "react-router-dom";
+
+// const router = createBrowserRouter([
+//   {
+//     path: "/",
+//     element: <div>Hello world!</div>,
+//   },
+// ]);
+
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
 );
 root.render(
   <React.StrictMode>
-    <Layout>
+    <BrowserRouter>
       <App />
-    </Layout>
+    </BrowserRouter>
   </React.StrictMode>
 );
 

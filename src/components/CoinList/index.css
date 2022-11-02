@@ -1,0 +1,16 @@
+@import '~antd/dist/antd.less';
+
+.ant-card-head-title {
+  color: #2569a5;
+  font-weight: bold;
+}
+
+.ant-card-head {
+  border-bottom-width: 0px !important;
+}
+
+.ant-table-thead th{ 
+    background-color: #3783C6 !important;
+    color: white !important;
+    border: 0px;
+}

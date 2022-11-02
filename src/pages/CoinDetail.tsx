@@ -6,9 +6,9 @@ import ListCoin from "../components/CoinList/ListCoin";
 const Home: React.FC = () => {
   return (
     <div>
-      <p style={{ fontWeight: "normal", color: "#ACBCCF" }}>Home</p>
-      <Card title="Home">
-        <div>Ini adalah halaman Home</div>
+      <p style={{ fontWeight: "normal", color: "#ACBCCF" }}>Coint List</p>
+      <Card title="Coin List">
+        <ListCoin/>
       </Card>
     </div>
   );
