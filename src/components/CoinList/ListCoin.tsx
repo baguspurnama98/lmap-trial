@@ -47,6 +47,7 @@ const ListCoin: React.FC = () => {
       title: "Name",
       dataIndex: "name",
       width: 150,
+      
     },
     {
       title: "Symbol",
@@ -69,6 +70,7 @@ const ListCoin: React.FC = () => {
       dataIndex: "is_active",
       width: 150,
       render: (text) => (text == true ? "Yes" : "No"),
+      
     },
     {
       title: "Action",
