@@ -3,7 +3,7 @@ import React from "react";
 import Card from "../components/CoinList/Card";
 import ListCoin from "../components/CoinList/ListCoin";
 
-const Home: React.FC = () => {
+const Coin: React.FC = () => {
   return (
     <div>
       <p style={{ fontWeight: "normal", color: "#ACBCCF" }}>Coint List</p>
@@ -14,4 +14,4 @@ const Home: React.FC = () => {
   );
 };
 
-export default Home;
+export default Coin;

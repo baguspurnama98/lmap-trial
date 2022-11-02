@@ -35,7 +35,7 @@ export const AppHeader: React.FC<Props> = ({
         backgroundColor: "white",
       }}
     >
-      <div className="logo" style={{ fontWeight: "bold", fontSize: "18px" }}>
+      <div className="logo" style={{ fontWeight: "bold", fontSize: "18px", margin:"auto" }}>
         Latihan LMAP
       </div>
       <Menu mode="horizontal" defaultSelectedKeys={["home"]}>
