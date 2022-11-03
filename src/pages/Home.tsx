@@ -1,7 +1,7 @@
 import React from "react";
 // import { Card } from "antd"
 import Card from "../components/CoinList/Card";
-import ListCoin from "../components/CoinList/ListCoin";
+// import ListCoin from "../components/CoinList/ListCoin";
 
 const Home: React.FC = () => {
   return (

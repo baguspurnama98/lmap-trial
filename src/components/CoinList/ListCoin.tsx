@@ -4,8 +4,11 @@ import { Table, Modal, Button } from "antd";
 import type { ColumnsType } from "antd/es/table";
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import axios from "axios";
-
+// import axios from "axios";
+import { useDispatch, useSelector } from "react-redux";
+import * as Action from "../../redux/actions";
+import { RootState, AppDispatch,useAppDispatch  } from "../../redux/store";
+// ,
 interface DataType {
   id: string;
   name: string;
@@ -14,15 +17,29 @@ interface DataType {
   is_active: boolean;
   type: string;
 }
-const baseURL = "https://api.coinpaprika.com/v1/coins/";
+const useFetching = (someFetchActionCreator) => {
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(someFetchActionCreator());
+  }, []);
+};
+
+// const deleteCoin = (someFetchActionCreator) => {
+//   const dispatch = useDispatch();
+
+//   useEffect(() => {
+//     dispatch(someFetchActionCreator());
+//   }, []);
+// };
 
 const ListCoin: React.FC = () => {
-  const [data, getData] = useState([]);
-  useEffect(() => {
-    axios.get(baseURL).then((response) => {
-      getData(response.data);
-    });
-  }, []);
+  // const [data, getData] = useState([]);
+  const dispatch = useAppDispatch()
+
+  useFetching(Action.fetchListCoin);
+
+  const data = useSelector((state: RootState) => state.data);
 
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [itemSelected, setItem] = useState(0);
@@ -30,8 +47,16 @@ const ListCoin: React.FC = () => {
   const onDelete = (record) => {
     setIsModalOpen(true);
     setItem(record);
-    console.log(data);
+    // console.log(record);
+    // const deleteD = (someFetchActionCreator) => {
+    //   useEffect(() => {
+    //     dispatch(Action.deteleData);
+    //   }, []);
+    // };
+    // const dispatch = AppDispatch();
+    // dispatch({ type: "featureName/actionName, payload: {} })
   };
+
   const columns: ColumnsType<DataType> = [
     {
       title: "ID",
@@ -47,7 +72,6 @@ const ListCoin: React.FC = () => {
       title: "Name",
       dataIndex: "name",
       width: 150,
-      
     },
     {
       title: "Symbol",
@@ -70,7 +94,6 @@ const ListCoin: React.FC = () => {
       dataIndex: "is_active",
       width: 150,
       render: (text) => (text == true ? "Yes" : "No"),
-      
     },
     {
       title: "Action",
@@ -89,7 +112,8 @@ const ListCoin: React.FC = () => {
     setIsModalOpen(true);
   };
 
-  const handleOk = () => {
+  const useHandleOk = () => {
+    dispatch(Action.deteleData(itemSelected));
     setIsModalOpen(false);
   };
 
@@ -110,7 +134,7 @@ const ListCoin: React.FC = () => {
         title="Hapus Data"
         centered
         open={isModalOpen}
-        onOk={handleOk}
+        onOk={useHandleOk}
         onCancel={handleCancel}
       >
         <p>

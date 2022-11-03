@@ -1,1 +1,0 @@
-export const FETCH_DATA_COIN = "FETCH_DATA_COIN";

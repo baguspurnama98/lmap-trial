@@ -1,14 +1,31 @@
-import * as ActionTypes from "./ActionTypes";
+import * as ActionTypes from "../ActionTypes";
+// import { Api } from "../../services/Api";
+import axios from 'axios';
 
-// export const fetchStart = () => {
-// 	return (dispatch) => dispatch({ type: FETCH_START })
-// }
+export const fetchListCoin = () => async (dispatch) => {
+	dispatch({ type: ActionTypes.FETCH_START })
+    const baseURL = "https://api.coinpaprika.com/v1/coins/";
+	dispatch({ type: ActionTypes.FETCH_DATA_COIN })
+	try {
+		const request = await axios.get(baseURL)
+		const response = await request.data
+		dispatch({ type: ActionTypes.FETCH_SUCCESS, payload:response })
+        // console.log(response)
+		// return response
+	} catch (error) {
+		dispatch({ type: ActionTypes.FETCH_ERROR })
+		console.log(error)
+	}
+}
 
-// export const getDataTeacher = (dataTeacher, dataSchool) => {
-//     return {
-//       type: ActionTypes.TEACHER_SUCCESS_LOGIN,
-//       dataTeacher: dataTeacher,
-//       dataSchool: dataSchool,
+// https://redux.js.org/tutorials/essentials/part-7-rtk-query-basics#rtk-query-overview
 
-//     };
-//   };
+export const deteleData = (payload) => {
+    // console.log(payload)
+    return (dispatch) => dispatch({ type: ActionTypes.DELETE_DATA_COIN, payload: payload })
+	
+    // return{
+    //     type: ActionTypes.DELETE_DATA_COIN, 
+    //     payload: payload
+    // }
+}
