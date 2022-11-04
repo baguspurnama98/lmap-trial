@@ -24,11 +24,12 @@ const rootReducer = (state = initialState, action: any) => {
       };
 
     case ActionTypes.DELETE_DATA_COIN:
-      console.log(action.payload);
-    //   const { id } = action.payload; 
-    //   state.data = state.data.filter(item => item.id !== id)
+      // console.log(action.payload);
+      // const { id } = action.payload; 
+      const data = state.data.filter(item => item['id'] !== action.payload)
       return {
         ...state,
+        data: data,
         dataDeleted:action.payload,
       }
     default:
