@@ -1,40 +1,21 @@
-import * as ActionTypes from "../ActionTypes";
+import { combineReducers, PayloadAction } from "@reduxjs/toolkit";
+import Coins from "./Coins";
 
-interface DataType {
-    id: string;
-    name: string;
-    symbol: string;
-    rank: number;
-    is_active: boolean;
-    type: string;
-  }
+const appReducer = combineReducers({
+  // router: connectRouter(history),
+  coins: Coins,
+});
+export type appReducerType = ReturnType<typeof appReducer>;
 
-const initialState = {
-  data: [],
-  dataDeleted: [],
-};
+const rootReducer = (
+  state: appReducerType | undefined,
+  action: PayloadAction
+) => {
+  // if (action.type === USER_LOGOUT) {
+  //   return appReducer(undefined, action);
+  // }
 
-const rootReducer = (state = initialState, action: any) => {
-  switch (action.type) {
-    case ActionTypes.FETCH_SUCCESS:
-    //   console.log(action);
-      return {
-        ...state,
-        data: action.payload,
-      };
-
-    case ActionTypes.DELETE_DATA_COIN:
-      // console.log(action.payload);
-      // const { id } = action.payload; 
-      const data = state.data.filter(item => item['id'] !== action.payload)
-      return {
-        ...state,
-        data: data,
-        dataDeleted:action.payload,
-      }
-    default:
-      return state;
-  }
+  return appReducer(state, action);
 };
 
 export default rootReducer;

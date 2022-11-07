@@ -1,63 +1,31 @@
 import "./index.css";
-
+import { ICoin } from "../../services/Api";
 import { Table, Modal, Button } from "antd";
 import type { ColumnsType } from "antd/es/table";
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-// import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
+import { useGetCoinsQuery } from "../../services/Api";
 import * as Action from "../../redux/actions";
-import { RootState, AppDispatch,useAppDispatch  } from "../../redux/store";
-// ,
-interface DataType {
-  id: string;
-  name: string;
-  symbol: string;
-  rank: number;
-  is_active: boolean;
-  type: string;
-}
-const useFetching = (someFetchActionCreator) => {
-  const dispatch = useDispatch();
-
-  useEffect(() => {
-    dispatch(someFetchActionCreator());
-  }, []);
-};
-
-// const deleteCoin = (someFetchActionCreator) => {
-//   const dispatch = useDispatch();
-
-//   useEffect(() => {
-//     dispatch(someFetchActionCreator());
-//   }, []);
-// };
+import { useAppDispatch } from "../../redux/store";
+import { deleteCoin } from "../../services/Api";
 
 const ListCoin: React.FC = () => {
-  // const [data, getData] = useState([]);
-  const dispatch = useAppDispatch()
-
-  useFetching(Action.fetchListCoin);
-
-  const data = useSelector((state: RootState) => state.data);
-
+  // var posts = useSelector(allPosts);
+  var dispatch = useDispatch();
+  const { data, isLoading, isFetching } = useGetCoinsQuery();
+  console.log(useGetCoinsQuery())
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [itemSelected, setItem] = useState(0);
+  // console.log(isLoading, isFetching)
+  // https://redux-toolkit.js.org/rtk-query/usage/queries
 
   const onDelete = (record) => {
     setIsModalOpen(true);
     setItem(record);
-    // console.log(record);
-    // const deleteD = (someFetchActionCreator) => {
-    //   useEffect(() => {
-    //     dispatch(Action.deteleData);
-    //   }, []);
-    // };
-    // const dispatch = AppDispatch();
-    // dispatch({ type: "featureName/actionName, payload: {} })
   };
 
-  const columns: ColumnsType<DataType> = [
+  const columns: ColumnsType<ICoin> = [
     {
       title: "ID",
       dataIndex: "id",
@@ -108,12 +76,15 @@ const ListCoin: React.FC = () => {
     },
   ];
 
-  const showModal = () => {
-    setIsModalOpen(true);
-  };
-
   const useHandleOk = () => {
-    dispatch(Action.deteleData(itemSelected));
+    // const dispatch = useAppDispatch();
+    // dispatch(Action.deteleData(itemSelected));
+
+    dispatch(
+      deleteCoin(itemSelected)
+    );
+
+    console.log(itemSelected);
     setIsModalOpen(false);
   };
 
