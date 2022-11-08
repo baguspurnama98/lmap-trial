@@ -1,6 +1,6 @@
 import React from "react";
 // import { Card } from "antd"
-import Card from "../components/CoinList/Card";
+import Card from "../components/Base/Card";
 // import ListCoin from "../components/CoinList/ListCoin";
 
 const Home: React.FC = () => {

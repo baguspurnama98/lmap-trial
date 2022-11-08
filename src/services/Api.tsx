@@ -18,57 +18,73 @@ export const coinsApi = createApi({
   }),
   tagTypes: ["Coins"],
   endpoints: (builder) => ({
-    // ? Query: Get All Products
     getCoins: builder.query<ICoin[], void >({
       query: () => `coins`,
       // transformResponse: (response: { data: { coins: ICoin } }) => {
       //   return response.data.coins;
       // },
     }),
+
     getDetail: builder.query<any, any >({
       query: (id) => `coins/${id}`,
-    })
+    }),
+
+    // deleteCoin: builder.mutation<any, any>({
+    //   query: (id) => ({
+    //     url: `/coins/${id}`,
+    //     method: "DELETE"
+    //   })
+    // }),
   }),
 });
-
-type FilteredCarsProps = {
-  id: string,
-  name: string,
-  address: string
+// ----------------------------------------
+type Data = {
+  id?: string;
+  name?: string;
+  symbol?: string;
+  rank?: number;
+  is_new?: string;
+  is_active?: boolean;
+  type?: string;
 }
 
-
-export interface IDeleted {
-  haveToDetele: string
-  dataDeleted: Array<FilteredCarsProps>
+export interface DataCoin {
+  data2: Array<Data>
+  // dataDeleted: Array<FilteredCarsProps>
+  selectedToDelete:string
   }
 
 
-const initialState:IDeleted = {
-  haveToDetele: '',
-  dataDeleted: [],
+const initialState:DataCoin = {
+  data2:[],
+  selectedToDelete: '',
 };
 
 export const coinsSlice = createSlice({
   name: "coinsSlice",
   initialState,
   reducers: {
-    deleteCoin: (state, action) => {
-      
-      // const temp = state.dataDeleted.push(action.payload);
-
+    addCoin:(state, action)=>{
       return {
         ...state,
-        haveToDetele: action.payload,
-        // dataDeleted: temp
+        data2: action.payload,
       };
     },
-    // coinsApi
+    deleteCoin: (state, action) => {
+      const temp = state.data2.filter((item) => item["id"] !== action.payload);
+      // const temp = state.data.push(action.payload);
+      return {
+        ...state,
+        data2: temp,
+        selectedToDelete: action.payload,
+      };
+    },
   }
 });
 
-// export const allPosts = (state) => state.posts || [];
-export const { deleteCoin } = coinsSlice.actions;
+export const { addCoin, deleteCoin } = coinsSlice.actions;
 export default coinsSlice.reducer;
 
-export const { useGetCoinsQuery, useGetDetailQuery } = coinsApi
+export const { useGetCoinsQuery, useGetDetailQuery
+  // , useDeleteCoinMutation 
+} = coinsApi

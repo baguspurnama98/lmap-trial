@@ -1,6 +1,5 @@
-import "./index.css";
 import { ICoin } from "../../services/Api";
-import { Table, Modal, Button } from "antd";
+import { Table, Modal, Button,Skeleton } from "antd";
 import type { ColumnsType } from "antd/es/table";
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
@@ -8,7 +7,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useGetCoinsQuery } from "../../services/Api";
 import * as Action from "../../redux/actions";
 import { useAppDispatch } from "../../redux/store";
-import { deleteCoin } from "../../services/Api";
+import {addCoin, deleteCoin} from "../../services/Api";
 // interface IForm {
 //   itemSelected: string;
 // }
@@ -30,8 +29,19 @@ const ListCoin: React.FC = () => {
   
   const { data, isLoading, isFetching, isSuccess } =  useGetCoinsQuery();
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [itemSelected, setItem] = useState<string>("");
+  const [itemSelected, setItem] = useState<any>("");
+	// const listData = useSelector((state) => state.masterParameter.data)
+  // console.log(data)
+  // if(isSuccess){
+    // const data2 = useSelector((state:any) => state.coins.queries["getCoins(undefined)"].data)
+    // console.log(data2)
+  // }
+  
+  // if(isSuccess){
+  //   dispatch(addCoin(data));
 
+  // }
+ 
   const [dataNew, setData] = useState(data);
   const [status, setStatus] = useState(false);
   
@@ -39,6 +49,7 @@ const ListCoin: React.FC = () => {
     if (isSuccess) {
       setData(data);
       setStatus(false)
+      
     }
 
     if (status) {
@@ -117,6 +128,10 @@ const ListCoin: React.FC = () => {
     const dataDeleted = dataNew?.filter((item) => item["id"] !== itemSelected);
     // useEffect(() => {
     setData(dataDeleted);
+
+    
+    // useDeleteCoinMutation(itemSelected);
+    
     // }, []);
     setStatus(true)
 
@@ -134,14 +149,15 @@ const ListCoin: React.FC = () => {
   return (
     <>
 
-    {!isLoading &&
-    
+    {!isLoading ?
     <Table
         columns={columns}
         dataSource={data}
         pagination={{ pageSize: 50 }}
         scroll={{ y: 240 }}
       />
+      :
+      <Skeleton active />
     }
       
 

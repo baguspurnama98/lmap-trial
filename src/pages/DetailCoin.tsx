@@ -1,6 +1,6 @@
 import React from "react";
 // import { Card } from "antd"
-import Card from "../components/CoinDetail";
+import Card from "../components/Base/Card";
 import InfoCoin from "../components/CoinDetail/Detail";
 
 const DetailCoin: React.FC = () => {
