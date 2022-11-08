@@ -9,14 +9,46 @@ import { useGetCoinsQuery } from "../../services/Api";
 import * as Action from "../../redux/actions";
 import { useAppDispatch } from "../../redux/store";
 import { deleteCoin } from "../../services/Api";
+// interface IForm {
+//   itemSelected: string;
+// }
+// const initUser = {itemSelected: '0'}
+// type IForm = typeof initUser;
 
 const ListCoin: React.FC = () => {
   // var posts = useSelector(allPosts);
   var dispatch = useDispatch();
-  const { data, isLoading, isFetching } = useGetCoinsQuery();
-  console.log(useGetCoinsQuery())
+
+  // const {
+  //   data: posts,
+  //   isLoading,
+  //   isSuccess,
+  //   isError,
+  //   error
+  // } = useGetPostsQuery()
+
+  
+  const { data, isLoading, isFetching, isSuccess } =  useGetCoinsQuery();
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [itemSelected, setItem] = useState(0);
+  const [itemSelected, setItem] = useState<string>("");
+
+  const [dataNew, setData] = useState(data);
+  const [status, setStatus] = useState(false);
+  
+  useEffect(() => {
+    if (isSuccess) {
+      setData(data);
+      setStatus(false)
+    }
+
+    if (status) {
+      setData(data);
+    }
+
+  });
+
+  // console.log(dataNew);
+
   // console.log(isLoading, isFetching)
   // https://redux-toolkit.js.org/rtk-query/usage/queries
 
@@ -77,14 +109,21 @@ const ListCoin: React.FC = () => {
   ];
 
   const useHandleOk = () => {
+    console.log(dataNew);
+
     // const dispatch = useAppDispatch();
     // dispatch(Action.deteleData(itemSelected));
+    // const dataDeleted = dataNew?.filter((item) => item["id"] != itemSelected);
+    const dataDeleted = dataNew?.filter((item) => item["id"] !== itemSelected);
+    // useEffect(() => {
+    setData(dataDeleted);
+    // }, []);
+    setStatus(true)
 
-    dispatch(
-      deleteCoin(itemSelected)
-    );
+    console.log(dataDeleted);
+    dispatch(deleteCoin(itemSelected));
 
-    console.log(itemSelected);
+    // console.log(itemSelected);
     setIsModalOpen(false);
   };
 
@@ -94,12 +133,17 @@ const ListCoin: React.FC = () => {
 
   return (
     <>
-      <Table
+
+    {!isLoading &&
+    
+    <Table
         columns={columns}
         dataSource={data}
         pagination={{ pageSize: 50 }}
         scroll={{ y: 240 }}
       />
+    }
+      
 
       <Modal
         title="Hapus Data"

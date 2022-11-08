@@ -25,6 +25,9 @@ export const coinsApi = createApi({
       //   return response.data.coins;
       // },
     }),
+    getDetail: builder.query<any, any >({
+      query: (id) => `coins/${id}`,
+    })
   }),
 });
 
@@ -68,4 +71,4 @@ export const coinsSlice = createSlice({
 export const { deleteCoin } = coinsSlice.actions;
 export default coinsSlice.reducer;
 
-export const { useGetCoinsQuery } = coinsApi
+export const { useGetCoinsQuery, useGetDetailQuery } = coinsApi

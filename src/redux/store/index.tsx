@@ -8,13 +8,12 @@ import { useDispatch } from 'react-redux'
 
 export const store = configureStore({
   reducer: {
-    // [coinsApi.reducerPath]: coinsApi.reducer,
-    // selected: coinsSlice.reducer
-    root: combineReducers({[coinsApi.reducerPath]: coinsApi.reducer, selected: coinsSlice.reducer})
+    [coinsApi.reducerPath]: coinsApi.reducer,
+    selected: coinsSlice.reducer
+    // root: combineReducers({[coinsApi.reducerPath]: coinsApi.reducer, selected: coinsSlice.reducer})
   },
   middleware: (getDefaultMiddleware) =>
-  getDefaultMiddleware({}).concat([coinsApi.middleware]),
-
+  getDefaultMiddleware({}).concat([coinsApi.middleware]), 
 });
 
 // setupListeners(store.dispatch); // untuk mengaktifkan onfocus, dll
