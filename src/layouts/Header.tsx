@@ -3,23 +3,10 @@ import { Menu, Layout } from "antd";
 import "./index.css";
 import { SmileOutlined, HomeOutlined } from "@ant-design/icons";
 import { Link } from "react-router-dom";
-// import { useNavigate } from "react-router-dom";
 interface Props {
   collapsed: boolean;
   onChangeCollapsed: () => void;
 }
-// const useCurrentPath = () => {
-//   const location = useLocation()
-//   // const [{ route }] = matchRoutes(routes, location)
-
-//   return location
-// }
-
-// let navigate = useNavigate();
-// const routeChange = (url) => {
-//   let path = `url`;
-//   navigate(path);
-// };
 
 const { Header } = Layout;
 export const AppHeader: React.FC<Props> = ({
@@ -35,32 +22,18 @@ export const AppHeader: React.FC<Props> = ({
         backgroundColor: "white",
       }}
     >
-      <div className="logo" style={{ fontWeight: "bold", fontSize: "18px", margin:"auto" }}>
+      <div className="logo my-auto" style={{ fontWeight: "bold", fontSize: "18px", margin:"auto" }}>
         Latihan LMAP
       </div>
-      <Menu mode="horizontal" defaultSelectedKeys={["home"]}>
+      <Menu mode="horizontal" className="my-auto">
        
-        <Menu.Item key="home" icon={<HomeOutlined />}>
+        <Menu.Item key="home" className="py-0 my-0 font-bold" icon={<HomeOutlined className="align-middle"/>}>
           <Link to="/home" />
           Home
         </Menu.Item>
-        <Menu.Item key="coin" icon={<SmileOutlined />}>
+        <Menu.Item key="coin" className="py-0 my-0 font-bold" icon={<SmileOutlined className="align-middle"/>}>
           <Link to="/coin-list" />
           Coin List
-          {/* <Menu.Item key="two" icon={<AppstoreOutlined />}>
-            Navigation Two
-          </Menu.Item>
-          <Menu.Item key="three" icon={<AppstoreOutlined />}>
-            Navigation Three
-          </Menu.Item>
-          <Menu.ItemGroup title="Item Group">
-            <Menu.Item key="four" icon={<AppstoreOutlined />}>
-              Navigation Four
-            </Menu.Item>
-            <Menu.Item key="five" icon={<AppstoreOutlined />}>
-              Navigation Five
-            </Menu.Item>
-          </Menu.ItemGroup> */}
         </Menu.Item>
       </Menu>
     </Header>

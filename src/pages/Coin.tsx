@@ -3,11 +3,11 @@ import Card from "../components/Base/Card";
 import ListCoin from "../components/CoinList/ListCoin";
 import { SearchOutlined } from "@ant-design/icons";
 import React from "react";
-// import { useGetCoinsQuery } from "../services/Api";
+import { useGetCoinsQuery } from "../services/Api";
 
 const Coin: React.FC = () =>  {
 
-  // const { data, isLoading, isFetching, isSuccess } =  useGetCoinsQuery();
+  const { data, isLoading, isFetching, isSuccess } =  useGetCoinsQuery();
 
 
   return (
@@ -19,8 +19,7 @@ const Coin: React.FC = () =>  {
           style={{ marginBottom: "15px", width: "300px" }}
           prefix={<SearchOutlined />}
         />
-        <ListCoin />
-        {/* data={data} */}
+        <ListCoin dataNew2={data} isSuccess={isSuccess} isLoading={isLoading} />
       </Card>
     </div>
   )

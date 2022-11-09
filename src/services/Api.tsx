@@ -18,23 +18,13 @@ export const coinsApi = createApi({
   }),
   tagTypes: ["Coins"],
   endpoints: (builder) => ({
-    getCoins: builder.query<ICoin[], void >({
+    getCoins: builder.query<ICoin[], void>({
       query: () => `coins`,
-      // transformResponse: (response: { data: { coins: ICoin } }) => {
-      //   return response.data.coins;
-      // },
     }),
 
-    getDetail: builder.query<any, any >({
+    getDetail: builder.query<any, any>({
       query: (id) => `coins/${id}`,
     }),
-
-    // deleteCoin: builder.mutation<any, any>({
-    //   query: (id) => ({
-    //     url: `/coins/${id}`,
-    //     method: "DELETE"
-    //   })
-    // }),
   }),
 });
 // ----------------------------------------
@@ -46,25 +36,24 @@ type Data = {
   is_new?: string;
   is_active?: boolean;
   type?: string;
-}
+};
 
 export interface DataCoin {
-  data2: Array<Data>
+  data2: Array<Data>;
   // dataDeleted: Array<FilteredCarsProps>
-  selectedToDelete:string
-  }
+  selectedToDelete: string;
+}
 
-
-const initialState:DataCoin = {
-  data2:[],
-  selectedToDelete: '',
+const initialState: DataCoin = {
+  data2: [],
+  selectedToDelete: "",
 };
 
 export const coinsSlice = createSlice({
   name: "coinsSlice",
   initialState,
   reducers: {
-    addCoin:(state, action)=>{
+    addCoin: (state, action) => {
       return {
         ...state,
         data2: action.payload,
@@ -79,12 +68,14 @@ export const coinsSlice = createSlice({
         selectedToDelete: action.payload,
       };
     },
-  }
+  },
 });
 
 export const { addCoin, deleteCoin } = coinsSlice.actions;
 export default coinsSlice.reducer;
 
-export const { useGetCoinsQuery, useGetDetailQuery
-  // , useDeleteCoinMutation 
-} = coinsApi
+export const {
+  useGetCoinsQuery,
+  useGetDetailQuery,
+  // , useDeleteCoinMutation
+} = coinsApi;
